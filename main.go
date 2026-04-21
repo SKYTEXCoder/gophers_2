@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-// Item struct represents a single item in the inventory
+// Struct Item ini buat representasi info satu barang di gudang ya
 type Item struct {
 	ID    int
 	Name  string
@@ -16,7 +16,7 @@ type Item struct {
 	Stock int
 }
 
-// Global variables for inventory state
+// Variabel global buat nyimpen data stok gudang kita nih
 var inventory []Item
 var nextID = 1
 
@@ -50,7 +50,7 @@ func main() {
 	}
 }
 
-// Function to add a new item to the inventory
+// Fungsi buat nambahin barang baru ke dalam gudang
 func tambahBarang(reader *bufio.Reader) {
 	fmt.Print("\nMasukkan Nama Barang: ")
 	nama, _ := reader.ReadString('\n')
@@ -74,7 +74,7 @@ func tambahBarang(reader *bufio.Reader) {
 		return
 	}
 
-	// Create new item and append to inventory slice
+	// Bikin item baru terus masukin deh ke dalam slice inventory
 	item := Item{
 		ID:    nextID,
 		Name:  nama,
@@ -88,7 +88,7 @@ func tambahBarang(reader *bufio.Reader) {
 	fmt.Println("\n--------------------------------------------------")
 }
 
-// Function to display all items currently in the inventory
+// Fungsi buat ngeliatin semua barang yang lagi ada di stok gudang
 func lihatStok() {
 	fmt.Println("\n=== DAFTAR STOK GUDANG ===")
 	if len(inventory) == 0 {
@@ -103,7 +103,7 @@ func lihatStok() {
 	fmt.Println("\n--------------------------------------------------")
 }
 
-// Function to handle purchasing logic
+// Fungsi buat ngurusin alur pas ada yang mau beli barang
 func beliBarang(reader *bufio.Reader) {
 	if len(inventory) == 0 {
 		fmt.Println("\n[SISTEM]: Gudang kosong, tidak ada barang untuk dibeli!")
@@ -133,7 +133,7 @@ func beliBarang(reader *bufio.Reader) {
 		return
 	}
 
-	// Find the item
+	// Cari dulu nih barangnya ada apa nggak
 	var selectedItem *Item
 	var itemIndex int
 	for i := range inventory {
@@ -173,7 +173,7 @@ func beliBarang(reader *bufio.Reader) {
 
 	kembalian := uang - totalHarga
 	
-	// Deduct stock from the slice
+	// Kurangin stok barang yang ada di dalem slice
 	inventory[itemIndex].Stock -= jumlah
 
 	fmt.Println("\n[SISTEM]: Transaksi Berhasil!")
